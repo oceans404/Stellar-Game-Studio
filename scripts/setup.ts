@@ -7,8 +7,8 @@
  * 1. Builds contracts
  * 2. Deploys to testnet
  * 3. Generates TypeScript bindings
- * 4. Configures frontend
- * 5. Installs frontend dependencies
+ * 4. Configures studio frontend
+ * 5. Installs studio frontend dependencies
  * 6. Starts the dev server
  */
 
@@ -22,8 +22,8 @@ console.log("This will:");
 console.log("  1. Build Soroban contracts");
 console.log("  2. Deploy to Stellar testnet");
 console.log("  3. Generate TypeScript bindings");
-console.log("  4. Configure frontend");
-console.log("  5. Install frontend dependencies");
+console.log("  4. Configure studio frontend");
+console.log("  5. Install studio frontend dependencies");
 console.log("  6. Start dev server\n");
 
 // Step 1: Build contracts
@@ -59,9 +59,9 @@ try {
   process.exit(1);
 }
 
-// Step 4: Configure frontend
+// Step 4: Configure studio frontend
 console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-console.log("Step 4/6: Configuring frontend");
+console.log("Step 4/6: Configuring studio frontend");
 console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
 let rpcUrl = 'https://soroban-testnet.stellar.org';
@@ -138,13 +138,13 @@ VITE_DEV_PLAYER2_SECRET=${walletSecrets.player2}
 await Bun.write(".env", envContent);
 console.log("✅ Root .env file created\n");
 
-// Step 5: Install frontend dependencies
+// Step 5: Install studio frontend dependencies
 console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-console.log("Step 5/6: Installing frontend dependencies");
+console.log("Step 5/6: Installing studio frontend dependencies");
 console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
 try {
-  await $`bun install`.cwd("frontend");
+  await $`bun install`.cwd("sgs_frontend");
   console.log("✅ Dependencies installed\n");
 } catch (error) {
   console.error("❌ Failed to install dependencies:", error);
@@ -162,10 +162,10 @@ for (const contract of contracts) {
   console.log(`  ${contract.packageName}: ${contractIds[contract.packageName]}`);
 }
 console.log("");
-console.log("Starting frontend at http://localhost:3000...\n");
+console.log("Starting studio frontend at http://localhost:3000...\n");
 
 try {
-  await $`bun run dev`.cwd("frontend");
+  await $`bun run dev`.cwd("sgs_frontend");
 } catch (error) {
   console.error("❌ Failed to start dev server:", error);
   process.exit(1);

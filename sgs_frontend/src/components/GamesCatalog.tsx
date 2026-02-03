@@ -199,7 +199,7 @@ export function GamesCatalog() {
       <section id="quickstart" className="quickstart-section">
         <div className="section-header">
           <h3>Quickstart</h3>
-          <p>Deploy contracts, generate bindings, and start the frontend in minutes.</p>
+          <p>Deploy contracts, generate bindings, and start the studio frontend in minutes.</p>
         </div>
         <div className="quickstart-grid">
           <div className="quickstart-card">
@@ -213,9 +213,58 @@ export function GamesCatalog() {
             <code>bun run setup</code>
           </div>
           <div className="quickstart-card">
-            <h4>3. Build The Game</h4>
-            <p>Fork a template contract and wire your gameplay.</p>
-            <code>cp -r contracts/number-guess contracts/my-game</code>
+            <h4>3. Create The Game</h4>
+            <p>Generate a contract + standalone frontend scaffold.</p>
+            <code>bun run create my-game</code>
+          </div>
+        </div>
+      </section>
+
+      <section id="commands" className="commands-section">
+        <div className="section-header">
+          <h3>Bun Commands</h3>
+          <p>Automate contracts, bindings, and standalone builds.</p>
+        </div>
+        <div className="commands-grid">
+          <div className="command-card">
+            <h4>All-in-one setup</h4>
+            <p>Build contracts, deploy to testnet, generate bindings, and start the studio.</p>
+            <code>bun run setup</code>
+          </div>
+          <div className="command-card">
+            <h4>Contracts only</h4>
+            <p>Build all Soroban contracts in the workspace.</p>
+            <code>bun run build</code>
+          </div>
+          <div className="command-card">
+            <h4>Deploy + IDs</h4>
+            <p>Deploy contracts to testnet and write contract IDs.</p>
+            <code>bun run deploy</code>
+          </div>
+          <div className="command-card">
+            <h4>Generate bindings</h4>
+            <p>Create TypeScript bindings for each contract.</p>
+            <code>bun run bindings</code>
+          </div>
+          <div className="command-card">
+            <h4>Create a game</h4>
+            <p>Scaffold a new contract and standalone frontend.</p>
+            <code>bun run create my-game</code>
+          </div>
+          <div className="command-card">
+            <h4>Publish frontend</h4>
+            <p>Export a standalone build for hosting.</p>
+            <code>bun run publish my-game</code>
+          </div>
+          <div className="command-card">
+            <h4>Studio dev server</h4>
+            <p>Run the studio frontend locally.</p>
+            <code>bun run dev</code>
+          </div>
+          <div className="command-card">
+            <h4>Build docs</h4>
+            <p>Emit the studio site into the repo <code>docs/</code> folder.</p>
+            <code>bun --cwd=sgs_frontend run build:docs</code>
           </div>
         </div>
       </section>

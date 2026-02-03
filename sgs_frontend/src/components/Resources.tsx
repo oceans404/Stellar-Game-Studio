@@ -214,8 +214,8 @@ rustup target add wasm32v1-none`}</code>
                 <li>Deploys contracts to Stellar testnet</li>
                 <li>Generates TypeScript bindings</li>
                 <li>Writes contract IDs to the root <code>.env</code></li>
-                <li>Installs frontend dependencies</li>
-                <li>Starts the dev server at localhost:3000</li>
+                <li>Installs studio frontend dependencies</li>
+                <li>Starts the studio dev server at localhost:3000</li>
               </ol>
             </div>
           </div>
@@ -226,10 +226,12 @@ rustup target add wasm32v1-none`}</code>
           <p>Need to run steps independently? Use the scripts below.</p>
           <div className="code-block">
             <pre>
-              <code>{`bun run build      # Build contracts only
-bun run deploy     # Deploy to testnet
-bun run bindings   # Generate TS bindings
-bun run dev        # Start frontend dev server`}</code>
+              <code>{`bun run build             # Build contracts only
+bun run deploy            # Deploy to testnet
+bun run bindings          # Generate TS bindings
+bun run create my-game    # Scaffold contract + standalone frontend
+bun run publish my-game   # Export standalone frontend
+bun run dev               # Start studio frontend dev server`}</code>
             </pre>
           </div>
           <p>
@@ -247,16 +249,16 @@ function CreateGameSection() {
     <div className="doc-section">
       <h1 className="doc-title">Create a New Game</h1>
       <p className="doc-subtitle">
-        Build a Soroban contract and UI that integrates with Game Hub and the studio frontend.
+        Build a Soroban contract and a standalone frontend that integrates with Game Hub.
       </p>
 
       <div className="doc-content">
         <section className="content-block">
           <h2>Overview</h2>
           <p>
-            A new game requires a Soroban contract, a small frontend module, and a catalog entry. The
-            build/deploy/bindings scripts auto-discover contracts from the workspace, so you do not
-            need to edit scripts when adding games.
+            The create script scaffolds a Soroban contract and a standalone frontend in
+            <code>frontend/</code>. If you want the game listed in the studio, you can copy the game UI
+            into <code>sgs_frontend/</code> and add a catalog entry.
           </p>
         </section>
 
@@ -264,38 +266,36 @@ function CreateGameSection() {
           <h2>Files you will modify</h2>
           <ul>
             <li>
-              <code>Cargo.toml</code> (root) - Add the contract to the workspace
-            </li>
-            <li>
               <code>contracts/&lt;game-name&gt;/</code> - New contract source
             </li>
             <li>
-              <code>frontend/src/games/&lt;game-name&gt;/</code> - UI + service files
+              <code>frontend/src/games/&lt;game-name&gt;/</code> - Standalone UI + service files
             </li>
             <li>
-              <code>frontend/src/utils/constants.ts</code> - Add a named export (optional)
+              <code>frontend/src/App.tsx</code> - Standalone game entry point
             </li>
             <li>
-              <code>frontend/src/config.ts</code> - Add backwards-compatible aliases if needed
+              <code>sgs_frontend/src/games/&lt;game-name&gt;/</code> - Studio UI module (optional)
             </li>
             <li>
-              <code>frontend/src/components/GamesCatalog.tsx</code> - Catalog card + routing
+              <code>sgs_frontend/src/components/GamesCatalog.tsx</code> - Studio catalog entry (optional)
             </li>
           </ul>
         </section>
 
         <section className="content-block">
-          <h2>Step 1: Copy a template contract</h2>
+          <h2>Step 1: Run the create script</h2>
           <div className="code-block">
             <pre>
-              <code>{`cp -r contracts/number-guess contracts/my-game`}</code>
+              <code>{`bun run create my-game`}</code>
             </pre>
           </div>
+          <p>If <code>frontend/</code> already exists, add <code>--force</code> to overwrite it.</p>
         </section>
 
         <section className="content-block">
           <h2>Step 2: Update the contract manifest</h2>
-          <p>Edit <code>contracts/my-game/Cargo.toml</code> with your package name.</p>
+          <p>Confirm the package name in <code>contracts/my-game/Cargo.toml</code>.</p>
           <div className="code-block">
             <pre>
               <code>{`[package]
@@ -316,7 +316,7 @@ soroban-sdk = { workspace = true }`}</code>
 
         <section className="content-block">
           <h2>Step 3: Add the contract to the workspace</h2>
-          <p>Update the root <code>Cargo.toml</code>:</p>
+          <p>The create script updates the root <code>Cargo.toml</code> for you.</p>
           <div className="code-block">
             <pre>
               <code>{`[workspace]
@@ -414,6 +414,34 @@ game_hub.add_game(&game_id);`}</code>
             <code>VITE_MY_GAME_CONTRACT_ID</code> to the root <code>.env</code>.
           </p>
         </section>
+
+        <section className="content-block">
+          <h2>Step 8: Refine the standalone frontend</h2>
+          <p>
+            The create script generates a standalone UI in <code>frontend/</code>. Update the UI, service,
+            and bindings as you build gameplay.
+          </p>
+          <div className="code-block">
+            <pre>
+              <code>{`cd frontend
+bun install
+bun run dev`}</code>
+            </pre>
+          </div>
+        </section>
+
+        <section className="content-block">
+          <h2>Optional: Add to the studio catalog</h2>
+          <p>
+            Copy your game module into the studio frontend and register it in the catalog.
+          </p>
+          <div className="code-block">
+            <pre>
+              <code>{`cp -r frontend/src/games/my-game sgs_frontend/src/games/
+# Then update sgs_frontend/src/components/GamesCatalog.tsx`}</code>
+            </pre>
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -478,7 +506,7 @@ members = [
           <p>Copy the game UI into the studio frontend.</p>
           <div className="code-block">
             <pre>
-              <code>{`cp -r /path/to/game/frontend/src/games/imported-game frontend/src/games/`}</code>
+              <code>{`cp -r /path/to/game/frontend/src/games/imported-game sgs_frontend/src/games/`}</code>
             </pre>
           </div>
           <div className="info-box">
@@ -512,7 +540,7 @@ export class ImportedGameService {
 
         <section className="content-block">
           <h2>Step 5: Register in the catalog</h2>
-          <p>Update <code>frontend/src/components/GamesCatalog.tsx</code>:</p>
+          <p>Update <code>sgs_frontend/src/components/GamesCatalog.tsx</code>:</p>
           <ul>
             <li>Import your game component</li>
             <li>Add a render branch for the new game</li>
@@ -529,7 +557,7 @@ export class ImportedGameService {
 bun run build
 bun run deploy
 bun run bindings
-cd frontend && bun run dev`}</code>
+cd sgs_frontend && bun run dev`}</code>
             </pre>
           </div>
         </section>

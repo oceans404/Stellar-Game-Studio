@@ -7,8 +7,9 @@
     "build": "bun run scripts/build.ts",
     "deploy": "bun run scripts/deploy.ts",
     "bindings": "bun run scripts/bindings.ts",
+    "create": "bun run scripts/create.ts",
     "publish": "bun run scripts/publish.ts",
-    "dev": "bun --cwd=frontend run dev"
+    "dev": "bun --cwd=sgs_frontend run dev"
   },
   "devDependencies": {
     "@types/bun": "latest"

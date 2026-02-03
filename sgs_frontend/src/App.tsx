@@ -12,7 +12,7 @@ function App() {
           <h3>Setup Required</h3>
           <p style={{ color: 'var(--color-ink-muted)', marginTop: '1rem' }}>
             Contract IDs not configured. Please run <code>bun run setup</code> from the repo root
-            to deploy contracts and configure the frontend.
+            to deploy contracts and configure the studio frontend.
           </p>
         </div>
       )}

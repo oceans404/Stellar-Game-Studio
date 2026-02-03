@@ -87,7 +87,7 @@ const force = args.includes('--force');
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const studioRoot = path.resolve(scriptDir, '..');
 const repoRoot = path.resolve(studioRoot, '..');
-const frontendRoot = path.join(studioRoot, 'frontend');
+const frontendRoot = path.join(studioRoot, 'sgs_frontend');
 const gameDir = path.join(frontendRoot, 'src', 'games', gameSlug);
 
 if (!existsSync(gameDir)) {
