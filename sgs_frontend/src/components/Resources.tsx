@@ -5,7 +5,6 @@ import {
   Sparkles,
   Download,
   UploadCloud,
-  GitBranch,
   Terminal,
   Wallet,
   ShieldCheck,
@@ -90,25 +89,12 @@ export function Resources({ onBack }: ResourcesProps) {
           <nav className="sidebar-nav">
             <button
               className="nav-item external"
-              onClick={() => handleExternalLink('https://github.com/jamesbachini/Stellar-Game-Studio')}
-            >
-              <span className="nav-icon" aria-hidden="true">
-                <GitBranch size={16} />
-              </span>
-              <span className="nav-label">GitHub Repo</span>
-              <span className="external-icon" aria-hidden="true">
-                <ExternalLink size={16} />
-              </span>
-            </button>
-
-            <button
-              className="nav-item external"
               onClick={() => handleExternalLink('https://developers.stellar.org/')}
             >
               <span className="nav-icon" aria-hidden="true">
                 <ExternalLink size={16} />
               </span>
-              <span className="nav-label">Stellar Developer Docs</span>
+              <span className="nav-label">Developer Docs</span>
               <span className="external-icon" aria-hidden="true">
                 <ExternalLink size={16} />
               </span>
@@ -135,6 +121,19 @@ export function Resources({ onBack }: ResourcesProps) {
                 <ExternalLink size={16} />
               </span>
               <span className="nav-label">Developer Tools</span>
+              <span className="external-icon" aria-hidden="true">
+                <ExternalLink size={16} />
+              </span>
+            </button>
+
+            <button
+              className="nav-item external"
+              onClick={() => handleExternalLink('https://soropg.com')}
+            >
+              <span className="nav-icon" aria-hidden="true">
+                <ExternalLink size={16} />
+              </span>
+              <span className="nav-label">Soroban Playground</span>
               <span className="external-icon" aria-hidden="true">
                 <ExternalLink size={16} />
               </span>

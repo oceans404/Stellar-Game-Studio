@@ -1,58 +1,77 @@
+import { useEffect, useState } from 'react';
+import { config } from './config';
 import { Layout } from './components/Layout';
-import { Resources } from './components/Resources';
-import './App.css';
+import { GamesCatalog } from './components/GamesCatalog';
+import { DocsPage } from './pages/DocsPage';
+import { HomePage } from './pages/HomePage';
+import type { Page } from './types/navigation';
+
+const baseUrl = import.meta.env.BASE_URL || '/';
+const normalizedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+const rootPath = normalizedBase === '' ? '/' : `${normalizedBase}/`;
+
+const resolvePageFromLocation = (): Page => {
+  if (typeof window === 'undefined') return 'home';
+
+  const hash = window.location.hash.replace('#', '');
+  if (hash === 'docs' || hash === 'games') return hash as Page;
+
+  const path = window.location.pathname;
+  const relative = normalizedBase && path.startsWith(normalizedBase)
+    ? path.slice(normalizedBase.length)
+    : path;
+  const segment = relative.replace(/^\/+/, '').split('/')[0];
+
+  if (segment === 'docs') return 'docs';
+  if (segment === 'games') return 'games';
+  return 'home';
+};
+
+const buildPath = (page: Page) => {
+  if (page === 'home') return rootPath;
+  return `${normalizedBase}/${page}`;
+};
 
 function App() {
+  const [page, setPage] = useState<Page>(() => resolvePageFromLocation());
+  const hasAnyContracts = Object.keys(config.contractIds).length > 0;
+
+  const navigate = (next: Page) => {
+    const target = buildPath(next);
+    if (typeof window !== 'undefined' && window.location.pathname !== target) {
+      window.history.pushState(null, '', target);
+    }
+    setPage(next);
+  };
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setPage(resolvePageFromLocation());
+    };
+
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('hashchange', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('hashchange', handleRouteChange);
+    };
+  }, []);
+
   return (
-    <Layout>
-      <section className="docs-hero">
-        <div className="hero-content">
-          <p className="hero-eyebrow">Stellar Game Studio</p>
-          <h1>Build two-player Soroban games that ship fast.</h1>
-          <p className="hero-lede">
-            A developer-first toolkit for Stellar games: deterministic testnet flows, instant player
-            switching, and a production build that plugs in CreitTech&apos;s wallet kit v2.
+    <Layout currentPage={page} onNavigate={navigate}>
+      {!hasAnyContracts && (
+        <div className="card" style={{ marginBottom: '2rem' }}>
+          <h3>Setup Required</h3>
+          <p style={{ color: 'var(--color-ink-muted)', marginTop: '1rem' }}>
+            Contract IDs not configured. Please run <code>bun run setup</code> from the repo root
+            to deploy contracts and configure the studio frontend.
           </p>
-          <div className="hero-actions">
-            <a
-              className="button primary"
-              href="https://github.com/jamesbachini/Stellar-Game-Studio"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Fork the repo
-            </a>
-            <a className="button ghost" href="#quickstart">
-              Read the quickstart
-            </a>
-          </div>
-          <div className="hero-tags">
-            <span>Testnet dev wallets</span>
-            <span>start_game + end_game enforced</span>
-            <span>Wallet kit v2 production build</span>
-          </div>
         </div>
+      )}
 
-        <div className="hero-panel">
-          <div className="hero-panel-header">Dev-to-Publish Pipeline</div>
-          <ol className="hero-steps">
-            <li>Fork and clone the repo</li>
-            <li>Deploy contracts to testnet</li>
-            <li>Build the standalone game frontend</li>
-            <li>Publish with a production wallet flow</li>
-          </ol>
-          <div className="hero-code">
-            <pre>
-              <code>{`bun run setup
-bun run create my-game
-bun run dev:game my-game
-bun run publish my-game --build`}</code>
-            </pre>
-          </div>
-        </div>
-      </section>
-
-      <Resources />
+      {page === 'docs' && <DocsPage />}
+      {page === 'games' && <GamesCatalog onBack={() => navigate('home')} />}
+      {page === 'home' && <HomePage onNavigate={navigate} />}
     </Layout>
   );
 }

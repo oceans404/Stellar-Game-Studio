@@ -6,14 +6,14 @@
   margin-bottom: 3rem;
 }
 
-.hero-content {
+.docs-hero .hero-content {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
   animation: heroReveal 0.6s ease both;
 }
 
-.hero-eyebrow {
+.docs-hero .hero-eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.24em;
   font-size: 0.7rem;
@@ -21,32 +21,32 @@
   color: var(--color-ink-muted);
 }
 
-.hero-content h1 {
+.docs-hero .hero-content h1 {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 3vw + 1.2rem, 3.8rem);
   line-height: 1.05;
   text-wrap: balance;
 }
 
-.hero-lede {
+.docs-hero .hero-lede {
   font-size: 1.05rem;
   color: var(--color-ink-muted);
   max-width: 38rem;
 }
 
-.hero-actions {
+.docs-hero .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
 
-.hero-tags {
+.docs-hero .hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
 }
 
-.hero-tags span {
+.docs-hero .hero-tags span {
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   border: 1px solid var(--color-border);
@@ -56,7 +56,7 @@
   text-transform: uppercase;
 }
 
-.hero-panel {
+.docs-hero .hero-panel {
   background: rgba(255, 255, 255, 0.96);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
@@ -68,7 +68,7 @@
   animation: heroReveal 0.6s ease 0.08s both;
 }
 
-.hero-panel-header {
+.docs-hero .hero-panel-header {
   font-size: 0.9rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -76,7 +76,7 @@
   font-weight: 600;
 }
 
-.hero-steps {
+.docs-hero .hero-steps {
   list-style: none;
   display: grid;
   gap: 0.6rem;
@@ -85,14 +85,14 @@
   margin: 0;
 }
 
-.hero-steps li {
+.docs-hero .hero-steps li {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   font-weight: 600;
 }
 
-.hero-steps li::before {
+.docs-hero .hero-steps li::before {
   counter-increment: steps;
   content: counter(steps);
   width: 1.6rem;
@@ -105,14 +105,14 @@
   font-size: 0.85rem;
 }
 
-.hero-code {
+.docs-hero .hero-code {
   background: rgba(15, 15, 15, 0.06);
   border-radius: var(--radius-md);
   padding: 1rem;
   border: 1px solid rgba(15, 15, 15, 0.08);
 }
 
-.hero-code code {
+.docs-hero .hero-code code {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   white-space: pre-wrap;
@@ -136,7 +136,7 @@
 }
 
 @media (max-width: 720px) {
-  .hero-content h1 {
+  .docs-hero .hero-content h1 {
     font-size: clamp(2.1rem, 4vw + 1rem, 3rem);
   }
 }
