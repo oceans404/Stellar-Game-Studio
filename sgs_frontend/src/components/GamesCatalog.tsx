@@ -4,6 +4,7 @@ import { NumberGuessGame } from '../games/number-guess/NumberGuessGame';
 import { DiceDuelGame } from '../games/dice-duel/DiceDuelGame';
 import { useWallet } from '@/hooks/useWallet';
 import typezeroHero from '../assets/typezero-hero.png';
+import xrayHero from '../assets/xray-hero.png';
 import './GamesCatalog.css';
 
 const games = [
@@ -178,6 +179,39 @@ export function GamesCatalog({ onBack }: GamesCatalogProps) {
               <img
                 src={typezeroHero}
                 alt="TypeZero gameplay screenshot"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div className="zk-card">
+            <div className="zk-card-text">
+              <div className="zk-card-title">XRay Games</div>
+              <p className="zk-card-description">
+                A series of games including slicer built with Circom circuits.
+              </p>
+              <div className="zk-card-links">
+                <a
+                  className="zk-card-link"
+                  href="https://github.com/fredericrezeau/xray-games"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  OPEN ON GITHUB
+                </a>
+                <a
+                  className="zk-card-link"
+                  href="https://kyungj.in/posts/trustless-gaming-stellar-xray-games/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  TUTORIAL
+                </a>
+              </div>
+            </div>
+            <div className="zk-media">
+              <img
+                src={xrayHero}
+                alt="XRay Games gameplay screenshot"
                 loading="lazy"
               />
             </div>
