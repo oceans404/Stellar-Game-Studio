@@ -43,7 +43,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <li>Publish with a production wallet flow</li>
           </ol>
           <pre>
-            <code>{`bun run setup\nbun run create my-game\nbun run dev:game my-game\nbun run build my-game\nbun run deploy my-game\nbun run publish my-game --build`}</code>
+            <code>{`bun run setup\nbun run create rps\nbun run dev:game rps\nbun run build rps\nbun run deploy rps\nbun run publish rps --build`}</code>
           </pre>
         </div>
       </section>
@@ -78,12 +78,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <div className="quickstart-card">
             <h4>2. Create Game</h4>
             <p>Scaffold a new contract and standalone frontend.</p>
-            <code>bun run create my-game</code>
+            <code>bun run create rps</code>
           </div>
           <div className="quickstart-card">
             <h4>3. Run Dev Environment</h4>
             <p>Run up a local development environment to build your game.</p>
-            <code>bun run dev:game my-game</code>
+            <code>bun run dev:game rps</code>
           </div>
         </div>
       </section>
@@ -166,27 +166,27 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <div className="command-card">
             <h4>Contracts only</h4>
             <p>Build all Soroban contracts or a single game.</p>
-            <code>bun run build my-game</code>
+            <code>bun run build rps</code>
           </div>
           <div className="command-card">
             <h4>Deploy + IDs</h4>
             <p>Deploy contracts to testnet (all or one) and write contract IDs.</p>
-            <code>bun run deploy my-game</code>
+            <code>bun run deploy rps</code>
           </div>
           <div className="command-card">
             <h4>Generate bindings</h4>
             <p>Create TypeScript bindings for all or one contract.</p>
-            <code>bun run bindings my-game</code>
+            <code>bun run bindings rps</code>
           </div>
           <div className="command-card">
             <h4>Create a game</h4>
             <p>Scaffold a new contract and standalone frontend.</p>
-            <code>bun run create my-game</code>
+            <code>bun run create rps</code>
           </div>
           <div className="command-card">
             <h4>Publish frontend</h4>
             <p>Export a standalone build for hosting.</p>
-            <code>bun run publish my-game</code>
+            <code>bun run publish rps</code>
           </div>
         </div>
       </section>

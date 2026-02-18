@@ -234,8 +234,8 @@ bun install`}</code>
           <p>Create a game and launch the dev wallet sandbox.</p>
           <div className="code-block">
             <pre>
-              <code>{`bun run create my-game
-bun run dev:game my-game`}</code>
+              <code>{`bun run create rps
+bun run dev:game rps`}</code>
             </pre>
           </div>
           <div className="info-box">
@@ -293,10 +293,10 @@ function CreateGameSection() {
           <h2>Step 1: Run the create script</h2>
           <div className="code-block">
             <pre>
-              <code>{`bun run create my-game`}</code>
+              <code>{`bun run create rps`}</code>
             </pre>
           </div>
-          <p>If <code>my-game-frontend/</code> already exists, add <code>--force</code> to overwrite it.</p>
+          <p>If <code>rps-frontend/</code> already exists, add <code>--force</code> to overwrite it.</p>
         </section>
 
         <section className="content-block">
@@ -349,9 +349,9 @@ pub trait GameHub {
             <pre>
               <code>{`bun run setup
 # or
-bun run build my-game
-bun run deploy my-game
-bun run bindings my-game`}</code>
+bun run build rps
+bun run deploy rps
+bun run bindings rps`}</code>
             </pre>
           </div>
         </section>
@@ -360,7 +360,7 @@ bun run bindings my-game`}</code>
           <h2>Step 4: Run the dev frontend</h2>
           <div className="code-block">
             <pre>
-              <code>{`bun run dev:game my-game`}</code>
+              <code>{`bun run dev:game rps`}</code>
             </pre>
           </div>
           <p>
@@ -374,8 +374,8 @@ bun run bindings my-game`}</code>
           <p>After regenerating bindings, copy them into your frontend module.</p>
           <div className="code-block">
             <pre>
-              <code>{`bun run bindings my-game
-cp bindings/my_game/src/index.ts my-game-frontend/src/games/my-game/bindings.ts`}</code>
+              <code>{`bun run bindings rps
+cp bindings/rps/src/index.ts rps-frontend/src/games/rps/bindings.ts`}</code>
             </pre>
           </div>
         </section>
@@ -453,8 +453,8 @@ function PublishGameSection() {
           <h2>Step 1: Deploy your contract to mainnet</h2>
           <div className="code-block">
             <pre>
-              <code>{`bun run build my-game
-stellar contract install --wasm target/wasm32v1-none/release/my_game.wasm --source-account <ADMIN_SECRET> --network mainnet
+              <code>{`bun run build rps
+stellar contract install --wasm target/wasm32v1-none/release/rps.wasm --source-account <ADMIN_SECRET> --network mainnet
 stellar contract deploy --wasm-hash <WASM_HASH> --source-account <ADMIN_SECRET> --network mainnet -- \\
   --admin <ADMIN_ADDRESS> --game-hub <GAME_HUB_MAINNET_CONTRACT_ID>`}</code>
             </pre>
@@ -483,9 +483,9 @@ stellar contract deploy --wasm-hash <WASM_HASH> --source-account <ADMIN_SECRET> 
           </p>
           <div className="code-block">
             <pre>
-              <code>{`bun run publish my-game --build
+              <code>{`bun run publish rps --build
 # Optional: choose a custom output directory
-bun run publish my-game --out ../my-game-frontend --build`}</code>
+bun run publish rps --out ../rps-frontend --build`}</code>
             </pre>
           </div>
         </section>
@@ -501,7 +501,7 @@ bun run publish my-game --out ../my-game-frontend --build`}</code>
   rpcUrl: "https://soroban-mainnet.stellar.org",
   networkPassphrase: "Public Global Stellar Network ; September 2015",
   contractIds: {
-    "my-game": "<YOUR_MAINNET_CONTRACT_ID>"
+    "rps": "<YOUR_MAINNET_CONTRACT_ID>"
   },
   simulationSourceAddress: "<OPTIONAL_FUNDED_ADDRESS>"
 };`}</code>
